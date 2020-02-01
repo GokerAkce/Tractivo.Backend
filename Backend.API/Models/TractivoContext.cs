@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend.API.Models;
 
 namespace Backend.API.Models
 {
@@ -19,7 +20,7 @@ namespace Backend.API.Models
 
 
 
-            // DATA SEEDING ############### 2 CUSTOMERS 1 CONTRACT AND 1 INVOICE ###############
+            // DATA SEEDING ############### 2 CUSTOMERS 1 CONTRACT AND 1 INVOICE 1 USER ###############
 
             modelBuilder.Entity<Customer>()
                 .HasData(new Customer()
@@ -62,14 +63,23 @@ namespace Backend.API.Models
                     StartDate = DateTime.Now,
                     MaturityDate = DateTime.Now.AddDays(15),
                     InvoiceNumber = "AAA000",
-                    Price = 350d,
+                    Price = 350d
                 });
+
+            modelBuilder.Entity<User>().HasData(new User() {
+                Id = 1,
+                FirstName = "goker",
+                LastName = "akce",
+                Password = "test",
+                Username = "test"
+            });;
         }
 
 
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }
 
