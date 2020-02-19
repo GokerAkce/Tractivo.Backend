@@ -42,6 +42,19 @@ namespace Backend.API.Controllers
             return invoice;
         }
 
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<IEnumerable<Invoice>>> GetInvoiceByUserId(int id)
+        {
+            var invoice = _context.Invoices.Where(x => x.Customer.Id == id).ToList();
+
+            if (invoice.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return invoice;
+        }
+
         // PUT: api/Invoices/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
